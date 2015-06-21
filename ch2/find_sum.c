@@ -43,12 +43,14 @@ bool findSum(int array[], int length, int sum, int* first, int* second)
 
 int main(int argc, char* argv[])
 {
-    int test_array[MAX_NUM] = {4, 2, 5, 1, 6, 7, 8, 3, 0, 9};
+    int test_array[MAX_NUM] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     printf("Test array is:\n");
     for (int i = 0; i < MAX_NUM; i++) {
         printf("%d\t", test_array[i]);
     }
     printf("\n");
+
+    //sort test_array by mergeSort before find
 
     int sum = 16;
     int first = 0, second = 0;
