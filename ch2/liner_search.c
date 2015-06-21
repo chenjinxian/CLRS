@@ -24,7 +24,11 @@ int main(int argc, char* argv[])
     printf("\n");
 
     int ret = linerSearch(test_array, MAX_NUM, 3);
-    printf("Find \"3\" at index %d of Test array\n", ret);
+    
+    if (ret == -1)
+        printf("Does not fined \"3\" int Test array.\n");
+    else
+        printf("Find \"3\" at index %d of Test array\n", ret + 1);
     
     return 0;
 }
