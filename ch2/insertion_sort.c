@@ -34,6 +34,7 @@ int main(int argc, char* argv[])
     for (int i = 0; i <  MAX_NUM; i++) {
         printf("%d\t", test_array[i]);
     }
+    printf("\n");
     
     return 0;
 }
