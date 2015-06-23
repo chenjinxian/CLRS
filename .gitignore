@@ -28,4 +28,7 @@
 *.x86_64
 *.hex
 
+# Trash
+*.DS_Store
+
 template.c
