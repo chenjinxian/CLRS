@@ -13,7 +13,30 @@ void swap(int* a, int* b)
     *b = temp;
 }
 
-void maxHeapify(int array[], int node)
+void maxHeapifyIterate(int array[], int node)
+{
+    while (1) {
+        int left = LEFT(node);
+        int right = RIGHT(node);
+
+        int largest = 0;
+        if (left <= MAX_NUM && array[left ] > array[node])
+            largest = left;
+        else
+            largest = node;
+
+        if (right <= MAX_NUM && array[right] > array[largest])
+            largest = right;
+
+        if (largest != node) {
+            swap(&array[node], &array[largest]);
+            node = largest;
+        } else
+            break;
+    }
+}
+
+void maxHeapifyRecursive(int array[], int node)
 {
     int left = LEFT(node);
     int right = RIGHT(node);
@@ -29,7 +52,27 @@ void maxHeapify(int array[], int node)
 
     if (largest != node) {
         swap(&array[node], &array[largest]);
-        maxHeapify(array, largest);
+        maxHeapifyRecursive(array, largest);
+    }
+}
+
+void minHeapify(int array[], int node)
+{
+    int left = LEFT(node);
+    int right = RIGHT(node);
+
+    int largest = 0;
+    if (left <= MAX_NUM && array[left ] < array[node])
+        largest = left;
+    else
+        largest = node;
+
+    if (right <= MAX_NUM && array[right] < array[largest])
+        largest = right;
+
+    if (largest != node) {
+        swap(&array[node], &array[largest]);
+        minHeapify(array, largest);
     }
 }
 
@@ -42,9 +85,25 @@ int main(int argc, char* argv[])
     }
     printf("\n");
 
-    maxHeapify(test_array, 1);
+    maxHeapifyRecursive(test_array, 1);
 
-    printf("Max-heapify array is:\n");
+    printf("Max-heapify-Rec array is:\n");
+    for (int i = 0; i < MAX_NUM; i++) {
+        printf("%d\t", test_array[i]);
+    }
+    printf("\n");
+    
+    maxHeapifyIterate(test_array, 1);
+
+    printf("Max-heapify-Ite array is:\n");
+    for (int i = 0; i < MAX_NUM; i++) {
+        printf("%d\t", test_array[i]);
+    }
+    printf("\n");
+    
+    minHeapify(test_array, 0);
+
+    printf("Min-heapify array is:\n");
     for (int i = 0; i < MAX_NUM; i++) {
         printf("%d\t", test_array[i]);
     }
