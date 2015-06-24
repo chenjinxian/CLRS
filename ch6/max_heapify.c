@@ -20,12 +20,12 @@ void maxHeapifyIterate(int array[], int node)
         int right = RIGHT(node);
 
         int largest = 0;
-        if (left <= MAX_NUM && array[left ] > array[node])
+        if (left < MAX_NUM && array[left ] > array[node])
             largest = left;
         else
             largest = node;
 
-        if (right <= MAX_NUM && array[right] > array[largest])
+        if (right < MAX_NUM && array[right] > array[largest])
             largest = right;
 
         if (largest != node) {
@@ -42,12 +42,12 @@ void maxHeapifyRecursive(int array[], int node)
     int right = RIGHT(node);
 
     int largest = 0;
-    if (left <= MAX_NUM && array[left ] > array[node])
+    if (left < MAX_NUM && array[left ] > array[node])
         largest = left;
     else
         largest = node;
 
-    if (right <= MAX_NUM && array[right] > array[largest])
+    if (right < MAX_NUM && array[right] > array[largest])
         largest = right;
 
     if (largest != node) {
@@ -62,12 +62,12 @@ void minHeapify(int array[], int node)
     int right = RIGHT(node);
 
     int largest = 0;
-    if (left <= MAX_NUM && array[left ] < array[node])
+    if (left < MAX_NUM && array[left ] < array[node])
         largest = left;
     else
         largest = node;
 
-    if (right <= MAX_NUM && array[right] < array[largest])
+    if (right < MAX_NUM && array[right] < array[largest])
         largest = right;
 
     if (largest != node) {
