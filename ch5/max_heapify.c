@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #define MAX_NUM 10
-#define PARENT(i) ((i - 1) >> 1)
+#define PARENT(i) (i == 0 ? 0 : (i - 1) >> 1)
 #define LEFT(i) ((i << 1) + 1)
 #define RIGHT(i) ((i << 1) + 2)
 
