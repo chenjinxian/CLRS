@@ -13,31 +13,31 @@ void swap(int* a, int* b)
     *b = temp;
 }
 
-void maxHeapify(int array[], int node)
+void maxHeapify(int array[], int node, int heap_size)
 {
     int left = LEFT(node);
     int right = RIGHT(node);
 
     int largest = 0;
-    if (left < MAX_NUM && array[left ] > array[node])
+    if (left < heap_size && array[left ] > array[node])
         largest = left;
     else
         largest = node;
 
-    if (right < MAX_NUM && array[right] > array[largest])
+    if (right < heap_size && array[right] > array[largest])
         largest = right;
 
     if (largest != node) {
         swap(&array[node], &array[largest]);
-        maxHeapify(array, largest);
+        maxHeapify(array, largest, heap_size);
     }
 }
 
-void buildMaxHeap(int array[], int length)
+void buildMaxHeap(int array[], int length, int* heap_size)
 {
-    //heap-size A = length
+    *heap_size = length;
     for (int i = (length - 1) / 2; i >= 0; i--)
-        maxHeapify(array, i);
+        maxHeapify(array, i, *heap_size);
 }
 
 int main(int argc, char* argv[])
@@ -49,7 +49,8 @@ int main(int argc, char* argv[])
     }
     printf("\n");
 
-    buildMaxHeap(test_array, MAX_NUM);
+    int heap_size = 0;
+    buildMaxHeap(test_array, MAX_NUM, &heap_size);
 
     printf("Build max-heapify array is:\n");
     for (int i = 0; i < MAX_NUM; i++) {
