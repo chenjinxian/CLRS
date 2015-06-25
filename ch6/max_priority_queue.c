@@ -39,6 +39,23 @@ int heapMaximum(int array[])
     return array[0];
 }
 
+void heapDelete(int array[], int i, int* heap_size)
+{
+    if (*heap_size <= i) {
+        printf("error: the node %d is not exist\n", i);
+        return;
+    }
+    if (*heap_size < 0) {
+        printf("error: heap underflow\n");
+        return;
+    }
+
+    array[i] = array[(*heap_size) - 1];
+    (*heap_size)--;
+
+    maxHeapify(array, i, *heap_size);
+}
+
 int heapExtractMax(int array[], int* heap_size)
 {
     if (*heap_size < 0) {
@@ -83,7 +100,8 @@ void maxHeapInsert(int array[], int length, int* heap_size, int key)
 
 int main(int argc, char* argv[])
 {
-#define sol1
+//solution 6.5-1, 2, 8
+#define sol8
     int test_array[MAX_NUM] = {15, 13, 9, 5, 12, 8, 7, 4, 0, 6, 2, 1};
 
     int heap_size = MAX_NUM - 1;
@@ -100,6 +118,11 @@ int main(int argc, char* argv[])
 #ifdef sol2
     maxHeapInsert(test_array, MAX_NUM, &heap_size, 10);
     printf("Heap insert key: %d\n", 10);
+#endif
+
+#ifdef sol8
+    printf("Heap delete key: %d\n", test_array[4]);
+    heapDelete(test_array, 4, &heap_size);
 #endif
 
     printf("Now the heap is:\n");
