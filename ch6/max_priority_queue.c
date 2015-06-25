@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MAX_NUM 12
+#define MAX_NUM 13
+#define MIN(a, b) (a < b ? a : b)
 #define PARENT(i) (i == 0 ? 0 : (i - 1) >> 1)
 #define LEFT(i) ((i << 1) + 1)
 #define RIGHT(i) ((i << 1) + 2)
@@ -19,7 +20,7 @@ void maxHeapify(int array[], int node, int heap_size)
     int right = RIGHT(node);
 
     int largest = 0;
-    if (left < heap_size && array[left ] > array[node])
+    if (left < heap_size && array[left] > array[node])
         largest = left;
     else
         largest = node;
@@ -33,7 +34,7 @@ void maxHeapify(int array[], int node, int heap_size)
     }
 }
 
-int heapMaxinum(int array[])
+int heapMaximum(int array[])
 {
     return array[0];
 }
@@ -68,9 +69,12 @@ void heapIncreaseKey(int array[], int i, int key)
     }
 }
 
-void maxHeapInsert(int array[], int* heap_size, int key)
+void maxHeapInsert(int array[], int length, int* heap_size, int key)
 {
-    (*heap_size)++;
+    if (++(*heap_size) > length) {
+        printf("heap overflow\n");
+        return;
+    }
     //init the value of insert node is less than new key
     //note that the index of array is from 0 to heap_size - 1
     array[(*heap_size) - 1] = key - 1;
@@ -79,27 +83,28 @@ void maxHeapInsert(int array[], int* heap_size, int key)
 
 int main(int argc, char* argv[])
 {
-#define sol2
+#define sol1
     int test_array[MAX_NUM] = {15, 13, 9, 5, 12, 8, 7, 4, 0, 6, 2, 1};
+
+    int heap_size = MAX_NUM - 1;
     printf("Test array is:\n");
-    for (int i = 0; i < MAX_NUM; i++) {
+    for (int i = 0; i < heap_size; i++) {
         printf("%d\t", test_array[i]);
     }
     printf("\n");
-
-    int heap_size = MAX_NUM;
 #ifdef sol1
     int max = heapExtractMax(test_array, &heap_size);
     printf("Heap extract max: %d\n", max);
 #endif
 
 #ifdef sol2
-    maxHeapInsert(test_array, &heap_size, 10);
+    maxHeapInsert(test_array, MAX_NUM, &heap_size, 10);
     printf("Heap insert key: %d\n", 10);
 #endif
 
     printf("Now the heap is:\n");
-    for (int i = 0; i < heap_size; i++) {
+    int size = MIN(heap_size, MAX_NUM);
+    for (int i = 0; i < size; i++) {
         printf("%d\t", test_array[i]);
     }
     printf("\n");
