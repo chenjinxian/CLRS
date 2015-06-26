@@ -19,11 +19,9 @@ void minHeapify(int array[], int node, int heap_size)
     int left = LEFT(node);
     int right = RIGHT(node);
 
-    int smallest = 0;
+    int smallest = node;
     if (left < heap_size && array[left] < array[node])
         smallest = left;
-    else
-        smallest = node;
 
     if (right < heap_size && array[right] < array[smallest])
         smallest = right;

@@ -18,11 +18,9 @@ void maxHeapify(int array[], int node, int heap_size)
     int left = LEFT(node);
     int right = RIGHT(node);
 
-    int largest = 0;
+    int largest = node;
     if (left < heap_size && array[left ] > array[node])
         largest = left;
-    else
-        largest = node;
 
     if (right < heap_size && array[right] > array[largest])
         largest = right;
