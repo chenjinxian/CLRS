@@ -19,18 +19,18 @@ void minHeapify(int array[], int node, int heap_size)
     int left = LEFT(node);
     int right = RIGHT(node);
 
-    int largest = 0;
+    int smallest = 0;
     if (left < heap_size && array[left] < array[node])
-        largest = left;
+        smallest = left;
     else
-        largest = node;
+        smallest = node;
 
-    if (right < heap_size && array[right] < array[largest])
-        largest = right;
+    if (right < heap_size && array[right] < array[smallest])
+        smallest = right;
 
-    if (largest != node) {
-        swap(&array[node], &array[largest]);
-        minHeapify(array, largest, heap_size);
+    if (smallest != node) {
+        swap(&array[node], &array[smallest]);
+        minHeapify(array, smallest, heap_size);
     }
 }
 
