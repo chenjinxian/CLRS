@@ -41,7 +41,7 @@ int heapExtractMax(int array[], int* heap_size)
 {
     if (*heap_size < 0) {
         printf("error: heap underflow\n");
-        return -1;
+        exit(-1);
     }
 
     int max = array[0];
@@ -57,7 +57,7 @@ void daryHeapIncreaseKey(int array[], int i, int key)
 {
     if (key < array[i]) {
         printf("error: new key is smaller than current key\n");
-        return;
+        exit(-1);
     }
 
     array[i] = key;
@@ -71,7 +71,7 @@ void maxHeapInsert(int array[], int length, int* heap_size, int key)
 {
     if (++(*heap_size) > length) {
         printf("heap overflow\n");
-        return;
+        exit(-1);
     }
     //init the value of insert node is less than new key
     //note that the index of array is from 0 to heap_size - 1
