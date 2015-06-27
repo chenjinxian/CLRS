@@ -38,6 +38,7 @@ int partition(int array[], int start, int end)
     
     return i;
 }
+
 void quickSort(int array[], int start, int end)
 {
     if (start < end) {
