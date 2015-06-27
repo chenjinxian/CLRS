@@ -18,6 +18,10 @@ void countingSort(
 {
     const int temp = k + 1;
     int* array_temp = (int*)malloc(sizeof(int) * temp);
+    if (array_temp == NULL) {
+        printf("allocate memery failed\n");
+        exit(-1);
+    }
     
     //init every elment of array_temp to 0, also can use calloc or memset
     //memset(array_temp, 0, temp);
