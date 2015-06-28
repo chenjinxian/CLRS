@@ -27,7 +27,7 @@ min_max min_maximum(int array[], int length)
     min_max mm;
     if (length % 2) {
         mm.min = array[0];
-        mm.min = array[0];
+        mm.max = array[0];
     } else {
         i++;
         mm.min = array[0];
