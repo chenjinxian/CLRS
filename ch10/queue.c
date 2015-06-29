@@ -5,57 +5,63 @@
 #define MAX_NUM 6
 #define NIL -1
 
-void printQueue(int array[], int head, int tail)
+typedef struct {
+    int array[MAX_NUM];
+    int head;
+    int tail;
+} queue;
+
+void printQueue(queue q)
 {
     for (int i = 0; i < MAX_NUM; i++) {
-        if (NIL != array[i])
-            printf("%3d\t", array[i]);
+        if (NIL != q.array[i])
+            printf("%3d\t", q.array[i]);
         else
             printf("NIL\t");
     }
     printf("\n");
 
-    if (head <= tail) {
-        for (int i = head - 1; i < tail - 1; i++)
-            printf("%3d\t", array[i]);
+    if (q.head <= q.tail) {
+        for (int i = q.head - 1; i < q.tail - 1; i++)
+            printf("%3d\t", q.array[i]);
     }
     else {
-        for (int i = head - 1; i < MAX_NUM; i++)
-            printf("%3d\t", array[i]);
-        for (int i = 0; i < tail - 1; i++)
-            printf("%3d\t", array[i]);
+        for (int i = q.head - 1; i < MAX_NUM; i++)
+            printf("%3d\t", q.array[i]);
+        for (int i = 0; i < q.tail - 1; i++)
+            printf("%3d\t", q.array[i]);
     }
 
     printf("\n");
 }
 
-void enqueue(int array[], int head, int* tail, int key)
+void enqueue(queue* q, int key)
 {
-    if (head == (*tail) + 1) {
+    if (q->head == q->tail + 1) {
         printf("overflow\n");
         exit(-1);
     } else {
-        array[(*tail) - 1] = key;
+        q->array[q->tail - 1] = key;
         
-        if (MAX_NUM == (*tail))
-            *tail = 1;
+        if (MAX_NUM == q->tail)
+            q->tail = 1;
         else
-            (*tail)++;
+            q->tail++;
     }
 }
 
-int dequeue(int array[], int* head, int tail)
+int dequeue(queue* q)
 {
-    if (tail == (*head)) {
+    if (q->tail == q->head) {
         printf("underflow\n");
         exit(-1);
     } else {
-        int key = array[(*head) - 1];
+        int key = q->array[q->head - 1];
 
-        if (MAX_NUM == (*head))
-            *head = 1;
+        if (MAX_NUM == q->head)
+            q->head = 1;
         else
-            (*head)++;
+            q->head++;
 
         return key;
     }
@@ -63,30 +69,31 @@ int dequeue(int array[], int* head, int tail)
 
 int main(int argc, char* argv[])
 {
-    int test_array[MAX_NUM] = {NIL, NIL, NIL, NIL, NIL, NIL};
+    queue q;
+    for (int i = 0; i < MAX_NUM; i++)
+        q.array[i] = NIL;
+    q.head = 1;
+    q.tail = 1;
+    printf("the queue is:\n");
+    printQueue(q);
 
-    int head = 1;
-    int tail = 1;
-    printf("the stack is:\n");
-    printQueue(test_array, head, tail);
-
-    enqueue(test_array, head, &tail, 4);
-    enqueue(test_array, head, &tail, 1);
-    enqueue(test_array, head, &tail, 3);
+    enqueue(&q, 4);
+    enqueue(&q, 1);
+    enqueue(&q, 3);
     printf("after enqueue 4, 1 and 3, stack is:\n");
-    printQueue(test_array, head, tail);
+    printQueue(q);
 
-    dequeue(test_array, &head, tail);
+    dequeue(&q);
     printf("after dequeue, stack is:\n");
-    printQueue(test_array, head, tail);
+    printQueue(q);
     
-    enqueue(test_array, head, &tail, 8);
+    enqueue(&q, 8);
     printf("after enqueue 8, stack is:\n");
-    printQueue(test_array, head, tail);
+    printQueue(q);
 
-    dequeue(test_array, &head, tail);
+    dequeue(&q);
     printf("after dequeue, stack is:\n");
-    printQueue(test_array, head, tail);
+    printQueue(q);
     
     return 0;
 }
