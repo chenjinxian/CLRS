@@ -4,69 +4,75 @@
 
 #define MAX_NUM 6
 
-void printStack(int array[], int top)
+typedef struct {
+    int array[MAX_NUM];
+    int top;
+} stack;
+
+void printStack(stack s)
 {
-    for (int i = 0; i < top; i++)
-        printf("%d\t", array[i]);
+    for (int i = 0; i < s.top; i++)
+        printf("%d\t", s.array[i]);
     printf("\n");
 }
 
-bool stackEmpty(int array[], int top)
+bool stackEmpty(stack s)
 {
-    if (0 == top)
+    if (0 == s.top)
         return true;
     else
         return false;
 }
 
-void push(int array[], int* top, int key)
+void push(stack* s, int key)
 {
-    if (MAX_NUM == (*top)) {
+    if (MAX_NUM == (s->top)) {
         printf("overflow\n");
         exit(-1);
     } else {
-        (*top)++;
-        array[(*top) - 1] = key;
+        s->top++;
+        s->array[s->top - 1] = key;
     }
 }
 
-int pop(int array[], int* top)
+int pop(stack* s)
 {
-    if (stackEmpty(array, *top)) {
+    if (stackEmpty(*s)) {
         printf("underflow\n");
         exit(-1);
     } else {
-        (*top)--;
-        return array[(*top)];
+        s->top--;
+        return s->array[s->top];
     }
 }
 
 int main(int argc, char* argv[])
 {
-    int test_array[MAX_NUM] = {0};
-
-    int top = 0;
+    stack s;
+    for (int i = 0; i < MAX_NUM; i++)
+        s.array[i] = 0;
+    s.top = 0;
     printf("the stack is:\n");
-    printStack(test_array, top);
+    printStack(s);
 
-    push(test_array, &top, 4);
-    push(test_array, &top, 1);
-    push(test_array, &top, 3);
+    push(&s, 4);
+    push(&s, 1);
+    push(&s, 3);
 
     printf("after push 4 , 1 and 3, stack is:\n");
-    printStack(test_array, top);
+    printStack(s);
 
-    pop(test_array, &top);
+    pop(&s);
     printf("after pop, stack is:\n");
-    printStack(test_array, top);
+    printStack(s);
     
-    push(test_array, &top, 8);
+    push(&s, 8);
     printf("after push 8, stack is:\n");
-    printStack(test_array, top);
+    printStack(s);
 
-    pop(test_array, &top);
+    pop(&s);
     printf("after pop, stack is:\n");
-    printStack(test_array, top);
+    printStack(s);
     
     return 0;
 }
