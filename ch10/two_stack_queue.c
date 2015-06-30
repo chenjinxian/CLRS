@@ -57,7 +57,7 @@ void enqueue(stack* stack_b, int key)
     }
 }
 
-void dequeue(stack* stack_a, stack* stack_b)
+int dequeue(stack* stack_a, stack* stack_b)
 {
     if (stackEmpty(*stack_a) && stackEmpty(*stack_b)) {
         printf("underflow\n");
@@ -72,7 +72,7 @@ void dequeue(stack* stack_a, stack* stack_b)
         }
     }
 
-    pop(stack_a);
+    return pop(stack_a);
 }
 
 int main(int argc, char* argv[])
