@@ -50,8 +50,10 @@ void listDelete(head_ptr ls_head, list_ptr ele_x)
         ele_t = ele_t->next;
     }
 
-    prev->next = ele_t->next;
-    ele_t->next = NULL;
+    if (prev != NULL) {
+        prev->next = ele_t->next;
+        ele_t->next = NULL;
+    }
 }
 
 int main(int argc, char* argv[])
