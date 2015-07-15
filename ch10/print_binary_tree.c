@@ -21,7 +21,7 @@ typedef struct {
 } stack;
 
 /*
-//recurisive procedure
+//recursive procedure
 void printElement(tree_ptr ts)
 {
     if (ts == NULL)
@@ -35,6 +35,7 @@ void printElement(tree_ptr ts)
 }
 */
 
+/*
 bool stackEmpty(stack s)
 {
     if (0 == s.top)
@@ -65,7 +66,7 @@ tree_ptr pop(stack *s)
     }
 }
 
-//nonrecurisive procedure
+//nonrecursive procedure with a stack
 void printElement(tree_ptr ts)
 {
     if (ts == NULL)
@@ -86,6 +87,37 @@ void printElement(tree_ptr ts)
         }
     }
 }
+*/
+
+//nonrecursive with no more constant extra space
+void printElement(tree_ptr ts)
+{
+    if (ts == NULL)
+        printf("tree is empty\n");
+    else {
+        tree_ptr temp = NULL;
+
+        while (ts) {
+            if (temp == ts->parent) {
+                printf("%d\t", ts->key);
+
+                temp = ts;
+                if (ts->left)
+                    ts = ts->left;
+                else if (ts->right)
+                    ts = ts->right;
+                else
+                    ts = ts->parent;
+            } else if (temp == ts->left && ts->right) {
+                temp = ts;
+                ts = ts->right;
+            } else {
+                temp = ts;
+                ts = ts->parent;
+            }
+        }
+    }
+}
 
 void printTree(root_ptr ts_root)
 {
@@ -96,14 +128,17 @@ void printTree(root_ptr ts_root)
 int main(int argc, char* argv[])
 {
     tree ele_x1;
+    tree ele_x2;
+
     ele_x1.key = 1;
     ele_x1.left = NULL;
     ele_x1.right = NULL;
+    ele_x1.parent = &ele_x2;
 
-    tree ele_x2;
     ele_x2.key = 4;
     ele_x2.left = &ele_x1;
     ele_x2.right = NULL;
+    ele_x2.parent = NULL;
     
     root_ptr ts_root = (root_ptr)malloc(sizeof(root));
     ts_root->root = &ele_x2;
