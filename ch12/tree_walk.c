@@ -23,12 +23,59 @@ void inorderTreeWalk(tree_ptr ts)
         inorderTreeWalk(ts->left);
         printf("%d\t", ts->key);
         inorderTreeWalk(ts->right);
+
+        /*
+         *preorderTreeWalk
+        printf("%d\t", ts->key);
+        preorderTreeWalk(ts->left);
+        preorderTreeWalk(ts->right);
+        */
+
+        /*
+         *postorderTreeWalk
+        postorderTreeWalk(ts->left);
+        postorderTreeWalk(ts->right);
+        printf("%d\t", ts->key);
+        */
+    }
+}
+
+void nonrecursiveTreeWalk(tree_ptr ts)
+{
+    if (ts == NULL)
+        printf("tree is empty\n");
+    else {
+        tree_ptr temp = NULL;
+
+        while (ts) {
+            if (temp == ts->parent) {
+                if (ts->left) {
+                    temp = ts;
+                    ts = ts->left;
+                    continue;
+                } else
+                    temp = NULL;
+            }
+            if (temp == ts->left) {
+                printf("%d\t", ts->key);
+
+                if (ts->right) {
+                    temp = ts;
+                    ts = ts->right;
+                } else
+                    temp = NULL;
+            }
+            if (temp == ts->right) {
+                temp = ts;
+                ts = ts->parent;
+            }
+        }
     }
 }
 
 void printTree(root_ptr ts_root)
 {
-    inorderTreeWalk(ts_root->root);
+    nonrecursiveTreeWalk(ts_root->root);
     printf("\n");
 }
 
