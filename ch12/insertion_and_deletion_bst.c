@@ -71,9 +71,9 @@ tree_ptr treeMinimum(tree_ptr node_x)
 
 void transplant(root_ptr ts_root, tree_ptr node_u, tree_ptr node_v)
 {
-    if (node_u->parent = NULL)
+    if (node_u->parent == NULL)
         ts_root->root = node_v;
-    else if (node_u = node_u->parent->left)
+    else if (node_u == node_u->parent->left)
         node_u->parent->left = node_v;
     else
         node_u->parent->right = node_v;
@@ -176,8 +176,8 @@ int main(int argc, char* argv[])
     treeInsert(ts_root, &ele13);
     printTree(ts_root);
     
-    printf("Delete the element with key of %d:\n", ele17.key);
-    treeDelete(ts_root, &ele17);
+    printf("Delete the element with key of %d:\n", ele15.key);
+    treeDelete(ts_root, &ele15);
     printf("The binary tree is:\n");
     printTree(ts_root);
     
