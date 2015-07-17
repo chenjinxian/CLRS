@@ -78,6 +78,22 @@ tree_ptr treeMinimum(tree_ptr node_x)
     return node_x;
 }
 
+tree_ptr recursiveMinimum(tree_ptr node_x)
+{
+    if (node_x != NULL && node_x->left != NULL)
+        return recursiveMinimum(node_x->left);
+    else
+        return node_x;
+}
+
+tree_ptr recursiveMaximum(tree_ptr node_x)
+{
+    if (node_x != NULL && node_x->right != NULL)
+        return recursiveMinimum(node_x->right);
+    else
+        return node_x;
+}
+
 tree_ptr treeMaximum(tree_ptr node_x)
 {
     if (node_x == NULL) {
