@@ -154,12 +154,23 @@ int main(int argc, char* argv[])
     ele14.parent = NULL;
     ele14.b_flag = true;
     
+    tree ele11;
+    ele11.key = 18;
+    ele11.left = NULL;
+    ele11.right = NULL;
+    ele11.parent = NULL;
+    ele11.b_flag = true;
+    
     printf("Insert an element with key of %d:\n", ele13.key);
     treeInsertEqualKeys(ts_root, &ele13);
     printTree(ts_root);
 
     printf("Insert an element with key of %d:\n", ele14.key);
     treeInsertEqualKeys(ts_root, &ele14);
+    printTree(ts_root);
+    
+    printf("Insert an element with key of %d:\n", ele11.key);
+    treeInsertEqualKeys(ts_root, &ele11);
     printTree(ts_root);
     
     free(ts_root);
