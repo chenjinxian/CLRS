@@ -3,6 +3,23 @@
 #include <stdbool.h>
 #include "tree_rotate.h"
 #include "rb_insertion.h"
+#include "rb_deletion.h"
+
+tree_ptr treeMinimum(tree_ptr node_x)
+{
+    if (node_x == NULL) {
+        printf("tree is empty\n");
+        return node_x;
+    }
+
+    while (node_x->left != NULL) {
+        printf("%d --> ", node_x->key);
+        node_x = node_x->left;
+    }
+    
+    printf("%d\n", node_x->key);
+    return node_x;
+}
 
 void inorderTreeWalk(tree_ptr ts)
 {
@@ -100,6 +117,10 @@ int main(int argc, char* argv[])
 
     rbInsert(ts_root, &ele4);
     printf("Ater insert 4, the tree is:\n");
+    printTree(ts_root);
+
+    rbDelete(ts_root, &ele14);
+    printf("Ater delete 14, the tree is:\n");
     printTree(ts_root);
 
     free(ts_root);

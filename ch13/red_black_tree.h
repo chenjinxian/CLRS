@@ -15,4 +15,6 @@ typedef struct root {
     struct element *root;
 } root, *root_ptr;
 
+tree_ptr treeMinimum(tree_ptr node_x);
+
 #endif //RED_BLACK_TREE_H
